@@ -43,5 +43,5 @@ jobs:
             - "SHA256:rMmcVP/OxXIUubywJjNGu24IteAn652a9K4mI67pqc0"
       - run:
           name: Deploy-Application
-          command: ssh -i key/devops-ec-access.pem -o StrictHostKeyChecking=no ec2-user@ec2-3-249-2-225.eu-west-1.compute.amazonaws.com "rm -rf DevOpsSecCA/;git clone https://github.com/rybarski/DevOpsSecCA.git; source DevOpsSecCA/deploy.sh"
+          command: ssh -i privatekey.pem -o StrictHostKeyChecking=no ec2-user@ec2-3-249-2-225.eu-west-1.compute.amazonaws.com "rm -rf DevOpsSecCA/;git clone https://github.com/rybarski/DevOpsSecCA.git; source DevOpsSecCA/deploy.sh"
 
