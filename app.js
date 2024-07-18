@@ -24,10 +24,4 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-const server = app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running on port ${port}`);
-});
-
-server.on('error', (err) => {
-    console.error('Server error:', err);
-});
+module.exports = app;
