@@ -12,6 +12,41 @@ const server = app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running on port ${port}`);
 });
 
+
+// Example route
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+
+// Catch-all route for 404 errors
+app.use((req, res, next) => {
+    res.status(404).send('Not Found');
+});
+
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+});
+
+app.on('error', (err) => {
+    console.error('Server error:', err);
+});
+
+app.get('/about', (req, res) => {
+    res.send('About Us');
+});
+
+app.get('/contact', (req, res) => {
+    res.send('Contact Us');
+});
+
+
+
+
+
+
+
+
+
 server.on('error', (err) => {
     console.error('Server error:', err);
 });
