@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to <%= title %>!</h1>
+  </header>
+  <main>
+    <p>This is an example of a simple HTML update for presentation purposes.</p>
+    <p>Feel free to explore the features of this application.</p>
+  </main>
+  <footer>
+    <p>&copy; 2024 Express App</p>
+  </footer>
+</body>
+</html>
