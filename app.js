@@ -7,14 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 
 var app = express();
-const port = process.env.PORT || 8444; // Try a different port if needed
-const server = app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running on port ${port}`);
-});
-
-server.on('error', (err) => {
-    console.error('Server error:', err);
-});
+var port = process.env.PORT || 8443;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,10 +35,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
 });
 
 module.exports = app;
