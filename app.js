@@ -1,21 +1,16 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const app = express();
 
-var indexRouter = require('./routes/index');
-
-var app = express();
-const port = process.env.PORT || 8444; // Try a different port if needed
-const server = app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is running on port ${port}`);
-});
-
+const port = process.env.PORT || 8444;
 
 // Example route
 app.get('/', (req, res) => {
     res.send('Hello, World!');
+});
+
+// Additional routes can be added here
+app.get('/about', (req, res) => {
+    res.send('About Us');
 });
 
 // Catch-all route for 404 errors
@@ -23,64 +18,16 @@ app.use((req, res, next) => {
     res.status(404).send('Not Found');
 });
 
-app.listen(port, '0.0.0.0', () => {
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+const server = app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running on port ${port}`);
 });
-
-app.on('error', (err) => {
-    console.error('Server error:', err);
-});
-
-app.get('/about', (req, res) => {
-    res.send('About Us');
-});
-
-app.get('/contact', (req, res) => {
-    res.send('Contact Us');
-});
-
-
-
-
-
-
-
-
 
 server.on('error', (err) => {
     console.error('Server error:', err);
 });
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-module.exports = app;
